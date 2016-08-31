@@ -1,2 +1,8 @@
-# vldb-DataNodeManger
+# Hadoop DataNodeManger
 Modified DataNodeManager for managing Hadoop cluster
+
+1.   $HADOOP_SRC_HOME/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/blockmanagement/DatanodeManager.java 의 파일을 본 프로그램의 소스코드로 변경
+2.   $HADOOP_SRC_HOME에서 Hadoop을 기존의 방법과 동일하게 컴파일 수행
+($mvn package -Pdist -DskipTests –Dtar)
+3.   hadoop-disk/target 에 생성된 binary로 HDFS 데몬을 실행
+4.   hdfs dfsadmin –setStoragePolicy 명령을 통해 사용할 storage policy를 설정하여 사용
