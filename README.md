@@ -6,3 +6,6 @@ Modified DataNodeManager for managing Hadoop cluster
 ($mvn package -Pdist -DskipTests –Dtar)
 3.   hadoop-disk/target 에 생성된 binary로 HDFS 데몬을 실행
 4.   hdfs dfsadmin –setStoragePolicy 명령을 통해 사용할 storage policy를 설정하여 사용
+
+@성균관대학교 VLDB 연구실 (이상원 교수님) 
+@담당연구원: 이종백
