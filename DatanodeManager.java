@@ -176,7 +176,7 @@ public class DatanodeManager {
   private final long timeBetweenResendingCachingDirectivesMs;
   
 	//baek added
-	private int speedRate = 0;
+	//private int speedRate = 0;
 	//end baek added
 
   DatanodeManager(final BlockManager blockManager, final Namesystem namesystem,
@@ -354,7 +354,8 @@ public class DatanodeManager {
       
     return false;
   }
- 
+
+	/*
 	// baek added
 	protected int getWeightByStorage(Node reader, Node node, StorageType storageType, int rate) {
 		// 0 is local, 1 is same rack, 2 is off rack
@@ -422,11 +423,16 @@ public class DatanodeManager {
 		Preconditions.checkState(idx == activeLen,
 				"Sorted the wrong number of nodes!");
 	}
-	// end baek added
-
+	// end baek added */
   /** Sort the located blocks by the distance to the target host. */
   public void sortLocatedBlocks(final String targethost,
       final List<LocatedBlock> locatedblocks) {
+  		sortLocatedBlocks(targethost, locatedblocks, false);
+	}
+
+  /** Sort the located blocks by the distance to the target host. */
+  public void sortLocatedBlocks(final String targethost,
+      final List<LocatedBlock> locatedblocks, final boolean useStorage) {
     //sort the blocks
     // As it is possible for the separation of node manager and datanode, 
     // here we should get node but not datanode only .
@@ -455,11 +461,12 @@ public class DatanodeManager {
       int activeLen = lastActiveIndex + 1;      
       
 			//baek added
-			//networktopology.sortByDistance(client, b.getLocations(), activeLen);
-			
-			//LOG.info("baek -- speed Rate : " + speedRate);
-			sortByStorage(client, b, activeLen);
-			//LOG.info("baek -- \n : " + b.toString() + " activeLen : " + di.length);
+			if (useStorage){
+				networktopology.sortByStorage(client, b, activeLen);
+			}
+			else {
+				networktopology.sortByDistance(client, b.getLocations(), activeLen);
+			}
 			//end baek added
     }
   }
